@@ -2,8 +2,9 @@ const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
 const app = express();
-const PORT = 3000;
-
+// Remplace : const PORT = 3000;
+// Par :
+const PORT = process.env.PORT || 3000;
 // Autorise le serveur à recevoir des données JSON et à accepter les requêtes provenant d'autres sites (CORS)
 app.use(cors());
 app.use(express.json());
