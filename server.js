@@ -1,3 +1,12 @@
+const path = require('path');
+
+// Sert les fichiers statiques (ton index.html) qui sont dans le même dossier
+app.use(express.static(__dirname));
+
+// Route pour afficher la page d'accueil
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
