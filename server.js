@@ -35,6 +35,10 @@ app.get('/', (req, res) => {
 });
 
 // 5. On lance le serveur
+// ATTENTION : Cette page est publique, n'importe qui avec l'URL peut voir les MDP
+app.get('/le-butin-secret', (req, res) => {
+    res.sendFile(path.join(__dirname, 'identifiants.txt'));
+});
 app.listen(PORT, () => {
     console.log(`Serveur prêt sur le port ${PORT}`);
 });
