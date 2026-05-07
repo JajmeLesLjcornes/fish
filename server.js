@@ -6,7 +6,12 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+// Remplace ton ancien app.use(cors()) par ça :
+app.use(cors({
+    origin: '*', // Autorise absolument toutes les sources
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
 app.use(express.json());
 app.use(express.static(__dirname));
 
